@@ -1,0 +1,52 @@
+﻿@model IList<PeugeotForum.Areas.Administration.Models.AccountsListViewModel>
+
+@{
+    ViewBag.Title = "Administrate users";
+}
+
+<h2>Administrate users</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Username
+            </th>
+            <th>
+                Role
+            </th>
+        </tr>
+    </thead>
+    <tbody class="table-hover" id="tbl">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr id=@i>
+                <td>
+                    @Model[i].Username
+                </td>
+                <td>
+                    @using (Ajax.BeginForm("ChangeUserRole", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "results" + i,
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "POST"
+                        }, new { }))
+                    {
+                        <div id=@("results" + i)>
+                            @Html.Partial("_UserAndRole", Model[i])
+                        </div>
+                        <input type="submit" value="Change Role" class="btn-block btn-danger" />
+                        @Html.Hidden("username", Model[i].Username)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        $('').submit();
+    </script>
+}
