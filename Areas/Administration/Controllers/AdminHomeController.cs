@@ -10,11 +10,13 @@
     using PeugeotForum.Models;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity;
-    using System.Diagnostics;
+    using System.Collections.Generic;
 
     [Authorize(Roles = "Administrator")]
     public class AdminHomeController : BaseController
     {
+        private const int PAGE_SIZE = 10;
+
         public AdminHomeController(IPeugeotForumData data)
             : base(data)
         {
@@ -22,20 +24,74 @@
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int? page, bool? sortByUsername, bool? reverse, string roleFilter)
         {
-            var usersList = this.data.Users
+            if (page == null || page < 0)
+            {
+                page = 0;
+                TempData["PageNumber"] = 0;
+            }
+            else
+            {
+                TempData["PageNumber"] = page;
+            }
+
+            if (sortByUsername == null)
+            {
+                TempData["sortByUsernameReverse"] = true;
+                sortByUsername = false;
+            }
+            else
+            {
+                TempData["sortByUsernameReverse"] = reverse;
+            }
+
+            var usersList = new List<AccountsListViewModel>();
+            if (reverse == true)
+            {
+                usersList = this.data.Users
+               .All()
+               .OrderBy(u => u.UserName)
+               .Select(AccountsListViewModel.FromApplicationUser)
+               .OrderByDescending(r => r.Username)
+               .Where(u => string.IsNullOrEmpty(roleFilter) || roleFilter == "All" ? true : u.RoleId == roleFilter)
+               .Skip((int)page * (PAGE_SIZE))
+               .Take(PAGE_SIZE + 1)
+               .ToList();
+            }
+            else
+            {
+                usersList = this.data.Users
                 .All()
+                .OrderBy(u => u.UserName)
                 .Select(AccountsListViewModel.FromApplicationUser)
+                .Where(u => string.IsNullOrEmpty(roleFilter) || roleFilter == "All" ? true : u.RoleId == roleFilter)
+                .OrderBy(r => r.Username)
+                .Skip((int)page * (PAGE_SIZE))
+                .Take(PAGE_SIZE + 1)
                 .ToList();
+            }
+
+
             usersList.ForEach(m => m.RoleName = this.data.Roles.All()
                 .Where(r => r.Id == m.RoleId)
                 .FirstOrDefault().Name);
+
             ViewBag.Roles = this.data.Roles.All().Select(r => new RoleViewModel
             {
                 RoleId = r.Id,
                 RoleName = r.Name
             }).ToList();
+
+            if (usersList.Count() > PAGE_SIZE)
+            {
+                usersList = usersList.Take(usersList.Count - 1).ToList();
+                TempData["LastPage"] = false;
+            }
+            else
+            {
+                TempData["LastPage"] = true;
+            }
 
             return View(usersList);
         }

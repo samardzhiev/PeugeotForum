@@ -2,11 +2,6 @@
 
 @{
     var roles = ViewBag.Roles as List<PeugeotForum.Areas.Administration.Models.RoleViewModel>;
-    roles.ForEach(r => new SelectListItem()
-    {
-        Text = r.RoleName,
-        Value = r.RoleId
-    });
 }
 
 @Html.DropDownList("roleId", roles.Select(r => new SelectListItem()
