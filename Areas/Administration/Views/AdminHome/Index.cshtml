@@ -65,6 +65,7 @@
                             HttpMethod = "POST"
                         }, new { }))
                     {
+                        @Html.AntiForgeryToken()
                         <div id=@("results" + i)>
                             @Html.Partial("_UserAndRole", Model[i])
                         </div>

@@ -96,6 +96,7 @@
             return View(usersList);
         }
 
+        [ValidateAntiForgeryToken]
         public ActionResult ChangeUserRole(string roleId, string username)
         {
             ChangeRole(roleId, username);
