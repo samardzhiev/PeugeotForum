@@ -1,3 +1,15 @@
 ﻿@{
     ViewBag.Title = "Peugeot Club";
 }
+
+<img src="~/Content/images/logo.png" width="200" />
+
+<span class="h1">Welcome to our Peugeot fan club</span>
+
+<div class="panel-info">This website is designed with educational purpose. Bootstrap, ASP.NET MVC and Telerik UI and are being used, as well as high-quality code.</div>
+@section widgets {
+    @Html.Kendo().Calendar().Name("calendar").Value(DateTime.Now)
+    <div class="clearfix"></div>
+}
+
+
