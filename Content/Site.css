@@ -31,3 +31,14 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.myCustomBody {
+    float:left; 
+    width:75%;
+}
+
+.myWidgets {
+    display:inline-block; 
+    width:1px;
+    padding-left:20px
+}

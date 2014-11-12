@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "My Notes";
+}
+
+@using PeugeotForum.Models
+
+<h1>My notes</h1>
+
+@(Html.Kendo()
+    .Grid<NoteViewModel>()
+    .Name("grid")
+    .DataSource(data => data
+        .Ajax()
+        .Events(events => events.Error("grid_error"))
+        .PageSize(5)
+        .Sort(model => model.Add(sort => sort.CreatedOn).Descending())
+        .Read(read => read.Action("ReadNotes", "Notes"))
+        .Model(model =>
+            {
+                model.Id(m => m.NoteId);
+                model.Field(m => m.CreatedOn).Editable(false);
+            })
+        .Create(create =>
+                create.Action("CreateNote", "Notes"))
+            .Update(update => update.Action("UpdateNote", "Notes"))
+            .Destroy(destroy => destroy.Action("DeleteNote", "Notes"))
+    )
+    .Columns(columns =>
+    {
+        columns.Bound(note => note.Title);
+        columns.Bound(note => note.Content);
+        columns.Bound(note => note.CreatedOn).Format("{0:dd MMM yyyy, HH:mm}");
+        columns.Command(commands =>
+        {
+            commands.Edit();
+            commands.Destroy();
+        }).Title("Commands").Width(200);
+    })
+    .Pageable(page =>
+            {
+                page.PageSizes(new int[] { 5, 10, 15 })
+                    .Refresh(true);
+            })
+    .Sortable()
+    .Editable()
+    .ToolBar(toolbar =>
+        toolbar.Create()
+    )
+)
+
+@section scripts {
+<script>
+function grid_error(e) {
+    if (e.errors) {
+        var message = "There are some errors:\n";
+        // Create a message containing all errors.
+        $.each(e.errors, function (key, value) {
+            if ('errors' in value) {
+                $.each(value.errors, function () {
+                    message += this + "\n";
+                });
+            }
+        });
+        // Display the message
+        alert(message);
+        // Cancel the changes
+        var grid = $("#grid").data("kendoGrid");
+        grid.cancelChanges();
+    }
+}
+</script>
+}

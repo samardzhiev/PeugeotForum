@@ -1,7 +1,9 @@
-﻿@model PeugeotForum.Areas.Administration.Models.AccountsListViewModel
+﻿@using PeugeotForum.Areas.Administration.Models
+
+@model PeugeotForum.Areas.Administration.Models.AccountsListViewModel
 
 @{
-    var roles = ViewBag.Roles as List<PeugeotForum.Areas.Administration.Models.RoleViewModel>;
+    var roles = ViewBag.Roles as List<RoleViewModel>;
 }
 
 @Html.DropDownList("roleId", roles.Select(r => new SelectListItem()
@@ -9,4 +11,4 @@
                                                                         Value = r.RoleId,
                                                                         Text = r.RoleName,
                                                                         Selected = Model.RoleId == r.RoleId ? true : false
-                                                                    }), null, new { @class="form-control" })
+                                                                    }), null, new { @class = "form-control" })

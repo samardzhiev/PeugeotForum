@@ -1,4 +1,6 @@
-﻿@{
+﻿@using PeugeotForum.Models
+
+@{
     ViewBag.Title = "Peugeot Club";
 }
 
@@ -8,8 +10,32 @@
 
 <div class="panel-info">This website is designed with educational purpose. Bootstrap, ASP.NET MVC and Telerik UI and are being used, as well as high-quality code.</div>
 @section widgets {
-    @Html.Kendo().Calendar().Name("calendar").Value(DateTime.Now)
-    <div class="clearfix"></div>
+    @Html.Kendo().Calendar().Name("calendar").Value(DateTime.Now).HtmlAttributes(new { style = "width:300px" })
+
+    @(Html.Kendo().Grid<ApplicationUser>()
+      .Name("grid")
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(5)
+          .Sort(model => model.Add(by => by.DateRegistered).Descending())
+          .Read(read => read.Action("Users_Read", "Home"))
+       )
+      .Columns(columns =>
+      {
+          columns.Bound(user => user.UserName)
+              .HtmlAttributes(new { style = "width: 170px; position:absolute" });
+          columns.Bound(user => user.DateRegistered)
+              .HtmlAttributes(new { style = "width: 30px" })
+              .ClientTemplate("#= kendo.toString(DateRegistered, \"dd MMM yyyy\") #");
+      })
+      .HtmlAttributes(new { style = "width: 300px" })
+      .Pageable(page =>
+            {
+                page.PageSizes(new int[] { 5, 10, 15 })
+                    .Refresh(true);
+            })
+      .Sortable()
+    )
 }
 
 

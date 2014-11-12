@@ -26,6 +26,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("My Notes", "Index", "Notes")</li>
+                    }
                     @if (User.IsInRole("Administrator"))
                     {
                         <li>@Html.ActionLink("Administrate users", "Index", "AdminHome", new { area = "Administration" }, null)</li>
@@ -36,12 +40,14 @@
         </div>
     </div>
     <div class="container body-content">
-        <div class="col-lg-9">
+        <div class="myCustomBody">
             @RenderBody()
         </div>
-
-        @RenderSection("Widgets", false)
-
+        
+        <div class="myWidgets">
+            @RenderSection("Widgets", false)
+        </div>
+        
         <footer>
             <div class="clearfix"></div>
                 <hr />
