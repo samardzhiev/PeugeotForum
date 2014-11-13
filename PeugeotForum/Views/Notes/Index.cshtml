@@ -48,11 +48,22 @@
     )
 )
 
+@Ajax.ActionLink("Push to Google Calendar!", "SyncWithGoogleCalendar", "ExternalSync", new AjaxOptions() 
+{
+    UpdateTargetId = "result",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "loading"
+})
+
+<div id="loading" style="display:none">Loading...</div>
+
+<div id="result">
+
+</div>
+
 @section scripts {
     <script>
-
         //kendo.culture("en-US");
-
         function grid_error(e) {
             if (e.errors) {
                 var message = "There are some errors:\n";

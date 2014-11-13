@@ -12,6 +12,7 @@
     using PeugeotForum.Models;
     using System.Globalization;
 
+    [Authorize]
     public class NotesController : BaseController
     {
         public NotesController(IPeugeotForumData data)
