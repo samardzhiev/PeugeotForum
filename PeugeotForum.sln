@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeugeotForum", "PeugeotForum\PeugeotForum.csproj", "{DD35629F-1687-4A34-B3A3-64C1E74675E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeugeotForum.Data", "PeugeotForum.Data\PeugeotForum.Data.csproj", "{4D48325D-8F00-4F5D-9A7F-8340FD8FADAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeugeotForum.Models", "PeugeotForum.Models\PeugeotForum.Models.csproj", "{F665A7FA-2A8B-432A-ADEF-C5D35030DFEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD35629F-1687-4A34-B3A3-64C1E74675E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD35629F-1687-4A34-B3A3-64C1E74675E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD35629F-1687-4A34-B3A3-64C1E74675E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD35629F-1687-4A34-B3A3-64C1E74675E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D48325D-8F00-4F5D-9A7F-8340FD8FADAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D48325D-8F00-4F5D-9A7F-8340FD8FADAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D48325D-8F00-4F5D-9A7F-8340FD8FADAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D48325D-8F00-4F5D-9A7F-8340FD8FADAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F665A7FA-2A8B-432A-ADEF-C5D35030DFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F665A7FA-2A8B-432A-ADEF-C5D35030DFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F665A7FA-2A8B-432A-ADEF-C5D35030DFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F665A7FA-2A8B-432A-ADEF-C5D35030DFEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
