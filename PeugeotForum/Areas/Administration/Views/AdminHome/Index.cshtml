@@ -1,0 +1,102 @@
+﻿@using PeugeotForum.Areas.Administration.Models
+
+@model IList<AccountsListViewModel>
+
+@{
+    ViewBag.Title = "Administrate users";
+}
+
+<h2>Administrate users</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("User", "Index", new
+           {
+               sortByUsername = true,
+               page = Request.Params["page"],
+               roleFilter = Request.Params["roleFilter"],
+               reverse = !(bool)TempData["sortByUsernameReverse"]
+           })
+            </th>
+            <th>
+                Filter by Role:
+                @using (Html.BeginForm("Index", "AdminHome", new
+                {
+                    sortByUsername = Request.Params["sortByUsername"],
+                    page = Request.Params["page"],
+                    reverse = Request.Params["reverse"]
+                }, FormMethod.Get, new
+                {
+                    @id = "formFilter",
+                    onchange = "$('#formFilter').submit()"
+                }))
+                {
+                    var roles = ViewBag.Roles as List<RoleViewModel>;
+                    roles.Add(new RoleViewModel() { RoleName = "----ALL----", RoleId = "All" });
+                    roles.ForEach(r => new SelectListItem()
+                    {
+                        Text = r.RoleName,
+                        Value = r.RoleId
+                    });
+
+                    @Html.DropDownList("roleFilter", roles.Select(r => new SelectListItem()
+                                                                    {
+                                                                        Value = r.RoleId,
+                                                                        Text = r.RoleName,
+                                                                        Selected = r.RoleId == "All" ? true : false
+                                                                    }), null, new { @class = "form-control" })
+                }
+            </th>
+        </tr>
+    </thead>
+    <tbody class="table-hover" id="tbl">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr id=@i>
+                <td>
+                    @Model[i].Username
+                </td>
+                <td>
+                    @using (Ajax.BeginForm("ChangeUserRole", null,
+                        new AjaxOptions
+                        {
+                            UpdateTargetId = "results" + i,
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "POST"
+                        }, new { }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div id=@("results" + i)>
+                            @Html.Partial("_UserAndRole", Model[i])
+                        </div>
+                        <input type="submit" value="Change Role" class="btn-block btn-danger" />
+                        @Html.Hidden("username", Model[i].Username)
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if ((int)TempData["PageNumber"] != 0)
+{
+    @Html.ActionLink("Previous ", "Index", new
+{
+    page = (int)TempData["PageNumber"] - 1,
+    reverse = Request.Params["reverse"],
+    sortByUsername = Request.Params["sortByUsername"],
+    roleFilter = Request.Params["roleFilter"],
+})
+}
+<span class="alert-info">@((int)TempData["PageNumber"] + 1)</span>
+@if ((bool)TempData["LastPage"] != true)
+{
+    @Html.ActionLink(" Next", "Index", new
+{
+    page = (int)TempData["PageNumber"] + 1,
+    reverse = Request.Params["reverse"],
+    sortByUsername = Request.Params["sortByUsername"],
+    roleFilter = Request.Params["roleFilter"],
+})
+}
