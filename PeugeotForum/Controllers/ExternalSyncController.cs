@@ -23,17 +23,21 @@
 
         public ActionResult SyncWithGoogleCalendar()
         {
+            const string CLIENT_ID = "592779274982-np57svfv9idd819je2o9pbr4rn2dpg48.apps.googleusercontent.com";
+            const string CLIENT_SECRET = "m8WQp5O3B4ifcmEWwCGNqUQ_";
+
+            var userID = this.User.Identity.GetUserId();
+
             try
             {
                 UserCredential credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                 new ClientSecrets
                 {
-                    ClientId = "592779274982-sk5rssenac5cnabfhuej9hg0fksoi2lk.apps.googleusercontent.com",
-                    ClientSecret = "hyczaUTwU1Kgctj_Q1g6zU2V",
-
+                    ClientId = CLIENT_ID,
+                    ClientSecret = CLIENT_SECRET,
                 },
                 new[] { CalendarService.Scope.Calendar },
-                "usert1",
+                userID,
                 CancellationToken.None).Result;
 
                 // Create the service.
@@ -67,7 +71,7 @@
                 }
 
                 calendarId = service.Calendars.Insert(calendar).Execute().Id;
-                var userID = this.User.Identity.GetUserId();
+                
                 var myNotes = this.data.Notes
                     .All().
                     Where(n => n.ApplicationUserId == userID)
