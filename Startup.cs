@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using System.Globalization;
 
 [assembly: OwinStartupAttribute(typeof(PeugeotForum.Startup))]
 namespace PeugeotForum

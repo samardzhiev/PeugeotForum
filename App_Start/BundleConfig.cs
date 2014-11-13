@@ -21,7 +21,8 @@
 
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
                         "~/Scripts/Kendo/kendo.all.min.js",
-                        "~/Scripts/Kendo/kendo.aspnetmvc.min.js"));
+                        "~/Scripts/Kendo/kendo.aspnetmvc.min.js",
+                        "~/Scripts/Kendo/kendo.culture.bg-BG.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/bootstrap.js",

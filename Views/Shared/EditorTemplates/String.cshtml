@@ -1,3 +1,17 @@
 ﻿@model object 
 
 @Html.Kendo().TextBoxFor(model => model)
+<script>
+    var textArea = $('<textarea>');
+    textArea.attr({ 'id': 'txtArea', 'data-bind': 'value:Content' });
+    textArea.insertAfter($('#Content').hide());
+    $('#txtArea').on('change', function () {
+        console.log('xaxa');
+        $('#Content').val($('#txtArea').val());
+    });
+</script>
+
+@*@Html.TextAreaFor(model=>model)*@
+
+
+

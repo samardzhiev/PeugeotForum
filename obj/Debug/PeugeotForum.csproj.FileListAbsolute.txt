@@ -1,10 +1,13 @@
-C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\obj\Debug\PeugeotForum.csprojResolveAssemblyReference.cache
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\PeugeotForum.dll.config
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\PeugeotForum.dll
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\PeugeotForum.pdb
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Antlr3.Runtime.dll
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\EntityFramework.dll
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\EntityFramework.SqlServer.dll
+C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Glimpse.AspNet.dll
+C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Glimpse.Core.dll
+C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Glimpse.Mvc5.dll
+C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Kendo.Mvc.dll
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -36,6 +39,7 @@ C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\Peug
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\WebGrease.dll
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\PeugeotForum.Data.pdb
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\PeugeotForum.Models.pdb
+C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Kendo.Mvc.xml
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Ninject.xml
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Ninject.Web.Common.xml
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Ninject.Web.Mvc.xml
@@ -62,13 +66,6 @@ C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\Peug
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\obj\Debug\PeugeotForum.dll
-C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\obj\Debug\PeugeotForum.pdb
-C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Glimpse.AspNet.dll
-C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Glimpse.Core.dll
-C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Glimpse.Mvc5.dll
-C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Kendo.Mvc.dll
-C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\Kendo.Mvc.xml
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\bg-BG\Kendo.Mvc.resources.dll
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\cs-CZ\Kendo.Mvc.resources.dll
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\da-DK\Kendo.Mvc.resources.dll
@@ -86,3 +83,6 @@ C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\Peug
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\tr-TR\Kendo.Mvc.resources.dll
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\uk-UA\Kendo.Mvc.resources.dll
 C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\bin\zh-CN\Kendo.Mvc.resources.dll
+C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\obj\Debug\PeugeotForum.csprojResolveAssemblyReference.cache
+C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\obj\Debug\PeugeotForum.dll
+C:\Users\Yordan\OneDrive\Documents\Visual Studio 2013\Projects\PeugeotForum\PeugeotForum\obj\Debug\PeugeotForum.pdb

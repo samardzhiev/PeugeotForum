@@ -30,6 +30,7 @@ using System.Linq.Expressions;
         [MinLength(3)]
         public string Content { get; set; }
 
-        public DateTime? CreatedOn { get; set; }
+        [Required]
+        public DateTime CreatedOn { get; set; }
     }
 }

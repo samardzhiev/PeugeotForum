@@ -10,6 +10,7 @@
 
     using PeugeotForum.Data;
     using PeugeotForum.Models;
+    using System.Globalization;
 
     public class NotesController : BaseController
     {
@@ -43,12 +44,13 @@
                     ApplicationUserId = this.User.Identity.GetUserId(),
                     Title = model.Title,
                     Content = model.Content,
-                    NoteId = model.NoteId
+                    NoteId = model.NoteId,
+                    CreatedOn = DateTime.Now
                 };
 
                 this.data.Notes.Add(note);
                 this.data.SaveChanges();
-
+                model.CreatedOn = note.CreatedOn;
                 model.NoteId = note.NoteId;
             }
 
@@ -64,7 +66,8 @@
                     ApplicationUserId = this.User.Identity.GetUserId(),
                     Title = model.Title,
                     Content = model.Content,
-                    NoteId = model.NoteId
+                    NoteId = model.NoteId,
+                    CreatedOn = model.CreatedOn
                 };
 
                 this.data.Notes.Update(note);
@@ -83,7 +86,8 @@
                     ApplicationUserId = this.User.Identity.GetUserId(),
                     Title = model.Title,
                     Content = model.Content,
-                    NoteId = model.NoteId
+                    NoteId = model.NoteId,
+                    CreatedOn = model.CreatedOn
                 };
 
                 this.data.Notes.Delete(note);
@@ -91,6 +95,12 @@
             }
 
             return Json(new[] { model }.ToDataSourceResult(request, ModelState));
+        }
+
+        protected override IAsyncResult BeginExecute(System.Web.Routing.RequestContext requestContext, AsyncCallback callback, object state)
+        {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            return base.BeginExecute(requestContext, callback, state);
         }
     }
 }
