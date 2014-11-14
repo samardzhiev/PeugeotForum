@@ -29,7 +29,7 @@
     {
         columns.Bound(note => note.Title);
         columns.Bound(note => note.Content);
-        columns.Bound(note => note.CreatedOn).Format("{0:dd MMM yyyy, hh:mm}");
+        columns.Bound(note => note.CreatedOn).Format("{0:dd MMM yyyy, HH:mm}");
         columns.Command(commands =>
         {
             commands.Edit();

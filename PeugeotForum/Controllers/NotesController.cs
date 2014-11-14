@@ -3,14 +3,15 @@
     using System;
     using System.Linq;
     using System.Web.Mvc;
-
+    using System.Globalization;
     using Microsoft.AspNet.Identity;
+    
     using Kendo.Mvc.UI;
     using Kendo.Mvc.Extensions;
 
     using PeugeotForum.Data;
     using PeugeotForum.Models;
-    using System.Globalization;
+    
 
     [Authorize]
     public class NotesController : BaseController

@@ -15,6 +15,12 @@
 
         IRepository<Note> Notes { get; }
 
+        IRepository<Topic> Topics { get; }
+
+        IRepository<Post> Posts { get; }
+
+        IRepository<Category> Categories { get; }
+
         int SaveChanges();
     }
 }

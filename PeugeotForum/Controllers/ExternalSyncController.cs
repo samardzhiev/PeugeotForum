@@ -1,18 +1,18 @@
 ﻿namespace PeugeotForum.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Threading;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+
     using Google.Apis.Auth.OAuth2;
     using Google.Apis.Calendar.v3;
     using Google.Apis.Calendar.v3.Data;
     using Google.Apis.Services;
-    using PeugeotForum.Data;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using System.Web;
-    using System.Web.Mvc;
-    using Microsoft.AspNet.Identity;
 
+    using PeugeotForum.Data;
+    
     public class ExternalSyncController : BaseController
     {
         public ExternalSyncController(IPeugeotForumData data)

@@ -1,0 +1,46 @@
+﻿@using PeugeotForum.Models
+@using Microsoft.AspNet.Identity
+
+@model TopicViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>@Model.Title</h2>
+
+<span class="">
+    Category: @Model.Category
+</span>
+
+@for (int i = 0; i < Model.Posts.Count; i++)
+{
+    <div class="post" id="@("post" + i)">
+        <div class="userArea">
+            @(Model.Posts[i].ApplicationUser.UserName)
+            <div>
+                Asked: @(Model.Posts[i].ApplicationUser.Topics.Count)
+            </div>
+            <div>
+                Posts: @(Model.Posts[i].ApplicationUser.Posts.Count)
+            </div>
+        </div>
+
+        <div class="postContentArea" id="@("postContentArea" + i)">
+            <div class="likesArea">
+                <span class="text-primary">@Model.Posts[i].Likes</span>
+                <input type="submit" class="btn-success" value="Vote" />
+            </div>
+
+            @Model.Posts[i].Content
+
+            @if (this.User.Identity.GetUserId() == Model.Posts[i].ApplicationUserId || this.User.IsInRole("Moderator"))
+            {
+                <input type="submit" value="Edit" class="editPostBtn" />
+            }
+        </div>
+    </div>
+
+
+}
+

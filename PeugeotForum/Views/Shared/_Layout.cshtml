@@ -26,6 +26,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Ask a question", "Index", "Topic")</li>
                     <li>@Html.ActionLink("My Notes", "Index", "Notes")</li>
                     @if (User.IsInRole("Administrator"))
                     {
@@ -53,5 +54,6 @@
     </div>
 
     @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jqueryval")
 </body>
 </html>

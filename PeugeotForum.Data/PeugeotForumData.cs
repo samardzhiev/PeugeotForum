@@ -40,6 +40,21 @@
             get { return this.GetRepository<Note>(); }
         }
 
+        public IRepository<Topic> Topics
+        {
+            get { return this.GetRepository<Topic>(); }
+        }
+
+        public IRepository<Post> Posts
+        {
+            get { return this.GetRepository<Post>(); }
+        }
+
+        public IRepository<Category> Categories
+        {
+            get { return this.GetRepository<Category>(); }
+        }
+
         public int SaveChanges()
         {
             return this.context.SaveChanges();
@@ -56,6 +71,5 @@
 
             return (IRepository<T>)this.repositories[typeOfRepository];
         }
-       
     }
 }
