@@ -5,6 +5,10 @@
 
     public class Post
     {
+        public Post()
+        {
+            this.CreatedOn = DateTime.Now;
+        }
         public int PostId { get; set; }
 
         [Required]
@@ -25,5 +29,8 @@
 
         [Required]
         public int TopicId { get; set; }
+
+        [Required]
+        public virtual Topic Topic { get; set; }
     }
 }

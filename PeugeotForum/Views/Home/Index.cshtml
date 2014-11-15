@@ -1,4 +1,4 @@
-﻿@using PeugeotForum.Models
+﻿@using PeugeotForum.Models.Kendo
 
 @{
     ViewBag.Title = "Peugeot Club";
@@ -9,24 +9,54 @@
 <span class="h1">Welcome to our Peugeot fan club</span>
 
 <div class="panel-info">This website is designed with educational purpose. Bootstrap, ASP.NET MVC and Telerik UI and are being used, as well as high-quality code.</div>
-@section widgets {
+
+ <div style="margin-top:100px">
+     @(Html.Kendo().Grid<TopicGridViewModel>()
+      .Name("gridTopics")
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(5)
+          .Model(m=>m.Field(f=>f.Title))
+          .Sort(model => model.Add(by => by.CreatedOn).Descending())
+          .Read(read => read.Action("Topics_Read", "Topic"))
+       )
+          .Columns(columns =>
+          {
+              columns.Bound(topic => topic.Title)
+                  .HtmlAttributes(new { style = "width:700px;" })
+                  .Title("Latest Topics").Encoded(false);
+              columns.Bound(topic => topic.CreatedOn)
+                  .HtmlAttributes(new { style = "width: 90px; " })
+              .ClientTemplate("#= kendo.toString(CreatedOn, \"dd MMM yyyy\") #");
+          })
+      .HtmlAttributes(new { style = "width: 800px" })
+      .Pageable(page =>
+            {
+                page.PageSizes(new int[] { 5, 10, 15 })
+                    .Refresh(true);
+            })
+      .Sortable()
+     )
+ </div>   
+
+@section sidebarWidgets {
     @Html.Kendo().Calendar().Name("calendar").Value(DateTime.Now).HtmlAttributes(new { style = "width:300px" })
 
-    @(Html.Kendo().Grid<ApplicationUser>()
+    @(Html.Kendo().Grid<ApplicationUserGridViewModel>()
       .Name("grid")
       .DataSource(dataSource => dataSource
           .Ajax()
           .PageSize(5)
-          .Sort(model => model.Add(by => by.DateRegistered).Descending())
+          .Sort(model => model.Add(by => by.RegisteredOn).Descending())
           .Read(read => read.Action("Users_Read", "Home"))
        )
       .Columns(columns =>
       {
-          columns.Bound(user => user.UserName)
+          columns.Bound(user => user.Username)
               .HtmlAttributes(new { style = "width: 170px; position:absolute" });
-          columns.Bound(user => user.DateRegistered)
-              .HtmlAttributes(new { style = "width: 30px" })
-              .ClientTemplate("#= kendo.toString(DateRegistered, \"dd MMM yyyy\") #");
+          columns.Bound(user => user.RegisteredOn)
+              .HtmlAttributes(new { style = "width: 108px" })
+              .ClientTemplate("#= kendo.toString(RegisteredOn, \"dd MMM yyyy\") #");
       })
       .HtmlAttributes(new { style = "width: 300px" })
       .Pageable(page =>

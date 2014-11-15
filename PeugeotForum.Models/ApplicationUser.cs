@@ -11,14 +11,12 @@
 
     public class ApplicationUser : IdentityUser
     {
-        private ICollection<Post> posts;
-        private ICollection<Topic> topics;
-
         public ApplicationUser()
         {
             this.DateRegistered = DateTime.Now;
-            this.posts = new HashSet<Post>();
-            this.topics = new HashSet<Topic>();
+            this.Posts = new HashSet<Post>();
+            this.Topics = new HashSet<Topic>();
+            this.Notes = new HashSet<Note>();
         }
 
         [Display(Name = "Registered On")]
@@ -27,6 +25,8 @@
         public virtual ICollection<Topic> Topics { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
+
+        public virtual ICollection<Note> Notes { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

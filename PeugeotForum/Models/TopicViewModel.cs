@@ -7,11 +7,9 @@
 
     public class TopicViewModel
     {
-        private ICollection<Post> posts;
-
         public TopicViewModel()
         {
-            this.posts = new List<Post>();
+            this.Posts = new List<Post>();
         }
 
         [Required]
@@ -20,6 +18,10 @@
         [Required]
         public string Category { get; set; }
 
+        [Required]
+        public int TopicId { get; set; }
+
         public IList<Post> Posts { get; set; }
+
     }
 }

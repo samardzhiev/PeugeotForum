@@ -7,13 +7,12 @@
 
     public class Category
     {
-        private ICollection<Topic> topics;
-
         public Category()
         {
-            this.topics = new HashSet<Topic>();
+            this.Topics = new HashSet<Topic>();
         }
 
+        [Required]
         public int CategoryId { get; set; }
 
         [Required]

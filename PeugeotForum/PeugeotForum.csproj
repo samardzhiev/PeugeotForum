@@ -237,15 +237,19 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotesController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\TopicController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddNewPostViewModel.cs" />
+    <Compile Include="Models\Kendo\ApplicationUserGridViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\NoteViewModel.cs" />
     <Compile Include="Models\CreateTopicViewModel.cs" />
+    <Compile Include="Models\Kendo\TopicGridViewModel.cs" />
     <Compile Include="Models\TopicViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -412,6 +416,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\ExternalSynchronizations\" />
+    <Folder Include="Views\Post\" />
     <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>

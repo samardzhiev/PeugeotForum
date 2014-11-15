@@ -7,13 +7,11 @@
 
     public class CreateTopicViewModel
     {
-        private const int NO_CHOOSEN_CATEGORY = 99;
-
-        private ICollection<SelectListItem> categories;
+        private const int NO_CHOOSEN_CATEGORY = int.MaxValue;
 
         public CreateTopicViewModel()
         {
-            this.categories = new HashSet<SelectListItem>();
+            this.Categories = new HashSet<SelectListItem>();
         }
 
         [Required]

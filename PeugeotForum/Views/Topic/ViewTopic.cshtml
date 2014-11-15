@@ -15,7 +15,7 @@
 
 @for (int i = 0; i < Model.Posts.Count; i++)
 {
-    <div class="post" id="@("post" + i)">
+    <div class="@(i % 2 == 0 ? "post postsShadowed" : "post postsNotShadowed")" id="@("post" + i)">
         <div class="userArea">
             @(Model.Posts[i].ApplicationUser.UserName)
             <div>
@@ -29,18 +29,90 @@
         <div class="postContentArea" id="@("postContentArea" + i)">
             <div class="likesArea">
                 <span class="text-primary">@Model.Posts[i].Likes</span>
-                <input type="submit" class="btn-success" value="Vote" />
+                <input type="submit" class="btn-info" value="Vote" />
             </div>
 
             @Model.Posts[i].Content
 
             @if (this.User.Identity.GetUserId() == Model.Posts[i].ApplicationUserId || this.User.IsInRole("Moderator"))
             {
-                <input type="submit" value="Edit" class="editPostBtn" />
+                <div class="clearfix"></div>
+                <span class="writtenAt">Written at @Model.Posts[i].CreatedOn.ToString("dd.MM.yy, HH:mm")</span>
+                <input type="submit" value="Edit" class="editPostBtn btn-danger" />
             }
         </div>
     </div>
+}
 
 
+
+<input type="submit" id="btnAddNewPost" class="btn-success btnAddNewPost" onclick="showNewPostArea()" value="Add New Post" />
+
+@using (Html.BeginForm("AddNewPost", "Post", new { topicId = Model.TopicId }, FormMethod.Post, new { id = "postForm" })
+)
+{
+    @Html.AntiForgeryToken()
+
+    <div class="newPostArea">
+        <textarea class="textAreaNewPost" name="postContent" id="textAreaNewPost"></textarea>
+    </div>
+    <div class="btnsNewPost" id="btnsNewPost">
+        <input type="button" value="Cancel" id="btnCancel" onclick="revertBack()" class="btnCancel btn-danger" />
+        <input type="button" value="Submit" id="btnSubmitNewPost" onclick="validateContent()" class="btnSubmitNewPost btn-success" />
+    </div>
+}
+
+@if (int.Parse(Request["page"]) != 0)
+{
+    @Html.ActionLink("Previous ", "ViewTopic", new
+{
+    topicId = Request["TopicId"],
+    page = int.Parse(Request["page"]) - 1,
+})
+}
+
+<span class="alert-info">@(int.Parse(Request["page"]) + 1)</span>
+
+@if ((bool)TempData["LastPage"] != true)
+{
+    @Html.ActionLink(" Next", "ViewTopic", new
+{
+    topicId = Request["TopicId"],
+    page = int.Parse(Request["page"]) + 1,
+})
+}
+
+
+
+@section scripts {
+    <script>
+        function showNewPostArea() {
+            $('#btnAddNewPost').hide();
+            $('#textAreaNewPost').show();
+            $('#btnsNewPost').show();
+        }
+
+        function revertBack() {
+            $('#btnAddNewPost').show();
+            $('#textAreaNewPost').hide();
+            $('#btnsNewPost').hide();
+            $('#textAreaNewPost').val(undefined);
+        }
+
+        function validateContent() {
+            console.log('cl');
+            var length = $('#textAreaNewPost').val().length;
+            if (length < 10) {
+                alert('The length of your post should be at least 10 characters.');
+            }
+            else if (length > 1000) {
+                alert('You have exceeded the maximum length of 1000 characters.');
+            }
+            else {
+                $('#postForm').submit();
+            }
+        }
+
+    </script>
 }
 

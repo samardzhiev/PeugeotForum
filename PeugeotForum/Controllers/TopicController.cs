@@ -2,24 +2,26 @@
 {
     using System;
     using System.Linq;
+    using System.Globalization;
     using System.Web.Mvc;
     using Microsoft.AspNet.Identity;
 
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+
     using PeugeotForum.Data;
     using PeugeotForum.Models;
+    using PeugeotForum.Models.Kendo;
 
-    [Authorize]
     public class TopicController : BaseController
     {
-        private const int NO_CHOOSEN_CATEGORY = 99;
-        private const int PAGE_SIZE = 2;
-
         public TopicController(IPeugeotForumData data)
-            :base(data)
+            : base(data)
         {
 
         }
 
+        [Authorize]
         public ActionResult Index()
         {
             var model = new CreateTopicViewModel();
@@ -28,6 +30,7 @@
             return View(model);
         }
 
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult CreateTopic(CreateTopicViewModel model)
         {
@@ -54,7 +57,6 @@
                 ApplicationUserId = userId,
                 Content = model.Content,
                 TopicId = topicId,
-                CreatedOn = DateTime.Now
             };
 
             this.data.Posts.Add(firstPost);
@@ -63,27 +65,54 @@
             return RedirectToAction("ViewTopic", new { topicId = topicId, page = 0 });
         }
 
+        [Authorize]
         public ActionResult ViewTopic(int topicId, int page)
         {
             var topic = this.data.Topics.Find(topicId);
+
+            if (page < 0)
+            {
+                page = 0;
+            }
 
             if (topic == null)
             {
                 return RedirectToAction("Index", "Error");
             }
+            var countPosts = topic.Posts.Count();
+            int lastPage = CalculateLastPage(topic, countPosts);
 
-            var model = new TopicViewModel() 
-            { 
+            if (lastPage == page)
+            {
+                TempData["LastPage"] = true;
+            }
+            else
+            {
+                TempData["LastPage"] = false;
+            }
+
+            var model = new TopicViewModel()
+            {
                 Category = topic.Category.Name,
                 Posts = topic.Posts
-                    .OrderByDescending(p=>p.CreatedOn)
-                    .Skip(page * PAGE_SIZE)
+                    .OrderBy(p => p.CreatedOn)
+                    .Skip((int)page * PAGE_SIZE)
                     .Take(PAGE_SIZE)
                     .ToList(),
-                Title = topic.Title
+                Title = topic.Title,
+                TopicId = topicId
             };
 
             return View(model);
+        }
+
+        [OutputCache(Duration = 120)]
+        public ActionResult Topics_Read([DataSourceRequest]DataSourceRequest request)
+        {
+            var result = this.data.Topics.All()
+                .OrderByDescending(u => u.DateCreated).Select(TopicGridViewModel.FromTopic);
+            var json = Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return json;
         }
 
         [NonAction]

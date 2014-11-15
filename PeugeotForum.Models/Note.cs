@@ -18,6 +18,8 @@
         [Required]
         public string ApplicationUserId { get; set; }
 
+        public virtual ApplicationUser ApplicationUser{ get; set; }
+
         [Required]
         public DateTime CreatedOn { get; set; }
     }

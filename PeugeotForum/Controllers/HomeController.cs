@@ -3,11 +3,13 @@
     using System;
     using System.Linq;
     using System.Web.Mvc;
+    using System.Globalization;
 
-    using PeugeotForum.Data;
-    using PeugeotForum.Models;
     using Kendo.Mvc.UI;
     using Kendo.Mvc.Extensions;
+
+    using PeugeotForum.Data;
+    using PeugeotForum.Models.Kendo;
 
     public class HomeController : BaseController
     {
@@ -22,12 +24,13 @@
             return View();
         }
 
-        [OutputCache(Duration=120)]
+        [OutputCache(Duration = 120)]
         public ActionResult Users_Read([DataSourceRequest]DataSourceRequest request)
         {
-            return Json(this.data.Users.All()
-                .OrderByDescending(u=>u.DateRegistered)
-                .ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            var result = this.data.Users.All()
+                .OrderByDescending(u => u.DateRegistered).Select(ApplicationUserGridViewModel.FromUser);
+            var json = Json(result.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            return json;
         }
     } 
 }
