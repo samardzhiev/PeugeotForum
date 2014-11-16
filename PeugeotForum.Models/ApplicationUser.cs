@@ -17,6 +17,7 @@
             this.Posts = new HashSet<Post>();
             this.Topics = new HashSet<Topic>();
             this.Notes = new HashSet<Note>();
+            this.Likes = new HashSet<Like>();
         }
 
         [Display(Name = "Registered On")]
@@ -27,6 +28,8 @@
         public virtual ICollection<Post> Posts { get; set; }
 
         public virtual ICollection<Note> Notes { get; set; }
+
+        public virtual ICollection<Like> Likes { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

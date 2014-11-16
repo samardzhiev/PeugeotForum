@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="Like.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

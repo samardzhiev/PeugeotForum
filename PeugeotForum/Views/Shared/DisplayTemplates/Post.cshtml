@@ -1,0 +1,31 @@
+﻿@using PeugeotForum.Models
+@using Microsoft.AspNet.Identity
+
+@model Post
+
+
+<div class="userArea">
+    @(Model.ApplicationUser.UserName)
+    <div>
+        Asked: @(Model.ApplicationUser.Topics.Count)
+    </div>
+    <div>
+        Posts: @(Model.ApplicationUser.Posts.Count)
+    </div>
+</div>
+
+<div class="postContentArea">
+    <div class="likesArea" id="@(TempData["current"] + "likesArea")">
+        @*@( TempData["current"] = TempData["current"] )*@
+        @Html.Partial("_LikePartial", Model)
+    </div>
+
+    @Model.Content
+
+    @if (this.User.Identity.GetUserId() == Model.ApplicationUserId || this.User.IsInRole("Moderator"))
+    {
+        <div class="clearfix"></div>
+        <span class="writtenAt">Written at @Model.CreatedOn.ToString("dd.MM.yy, HH:mm")</span>
+        <input type="submit" value="Edit" id="editBtn" class="editPostBtn btn-danger" />
+    }
+</div>

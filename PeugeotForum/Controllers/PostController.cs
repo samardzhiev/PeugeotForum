@@ -32,18 +32,42 @@
                 return RedirectToAction("Index", "Error");
             }
 
-            this.data.Posts.Add(new Post
+            var post = new Post
             {
                 ApplicationUserId = this.User.Identity.GetUserId(),
                 Content = model.PostContent,
-                TopicId = model.TopicId
-            });
+                TopicId = model.TopicId,
+            };
+
+            this.data.Posts.Add(post);
             this.data.SaveChanges();
             var countPosts = topic.Posts.Count();
 
             var lastPage = base.CalculateLastPage(topic, countPosts);
 
             return RedirectToAction("ViewTopic", "Topic", new { topicId = model.TopicId, page = lastPage });
+        }
+
+        public ActionResult Like(int postId)
+        {
+            var post = this.data.Posts.Find(postId);
+
+            if (post == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
+            var userId = this.User.Identity.GetUserId();
+
+            if (!post.IsAbleToLike(userId))
+            {
+                return PartialView("_LikePartial", post);
+            }
+
+            post.Likes.Add(new Like() { ApplicationUserId = userId, PostId = post.PostId });
+            this.data.SaveChanges();
+
+            return PartialView("_LikePartial", post);
         }
     }
 }

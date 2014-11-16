@@ -411,13 +411,15 @@
     <Content Include="Views\Topic\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Topic\ViewTopic.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Post.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Post.cshtml" />
+    <Content Include="Views\Shared\_LikePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\ExternalSynchronizations\" />
     <Folder Include="Views\Post\" />
-    <Folder Include="Views\Shared\DisplayTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

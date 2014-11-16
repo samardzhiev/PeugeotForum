@@ -1,0 +1,32 @@
+﻿@using PeugeotForum.Models
+@using Microsoft.AspNet.Identity
+
+@model Post
+
+<span class="text-primary">@Model.Likes.Count</span>
+
+@using (Ajax.BeginForm("Like", "Post", new { postId = Model.PostId }, new AjaxOptions
+        {
+            UpdateTargetId = TempData["current"] + "likesArea",
+            InsertionMode = InsertionMode.Replace,
+        }))
+{
+    if (Model.IsAbleToLike(this.User.Identity.GetUserId()))
+    {
+        <input type="submit" class="btn-info" value="Vote" />
+    }
+    else
+    {
+        if (Model.Likes.Count == 1)
+        {
+            <span class="text-primary">like</span>
+        }
+        else
+        {
+            <span class="text-primary">likes</span>
+        }
+
+    }
+}
+
+
