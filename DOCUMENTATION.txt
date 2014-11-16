@@ -1,0 +1,16 @@
+External libraries required: Kendo.Mvc.dll
+
+SEED DATA:
+
+users:
+
+user@outlook.com - user with user role
+moderator@outlook.com - user with moderator role
+admin@outlook.com - user with administrator role
+
+roles:
+
+User - standard user
+Administrator - able to change other users' roles
+Moderator - able to edit or delete others posts
+

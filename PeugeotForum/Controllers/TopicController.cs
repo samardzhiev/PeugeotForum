@@ -100,7 +100,8 @@
                     .Take(PAGE_SIZE)
                     .ToList(),
                 Title = topic.Title,
-                TopicId = topicId
+                TopicId = topicId,
+                Username = topic.ApplicationUser.UserName
             };
 
             return View(model);

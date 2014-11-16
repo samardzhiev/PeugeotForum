@@ -24,3 +24,21 @@
                class="editPostBtn btn-danger" />
     }
 }
+
+@if (this.User.IsInRole("Moderator"))
+{
+    using (Ajax.BeginForm("DeletePost", "Post", new { postId = Model.PostId }, new AjaxOptions()
+    {
+        UpdateTargetId = Model.PostId.ToString(),
+        InsertionMode = InsertionMode.Replace,
+    }, new { id = "deleteForm" + Model.PostId }))
+    {
+        @Html.AntiForgeryToken()
+
+    <input type="button"
+           value="Delete"
+           onclick="deletePost('#@( "deleteForm" + Model.PostId )')"
+           id="@( "DeleteBtn" + Model.PostId )"
+           class="deletePostBtn btn-danger" />
+    }
+}

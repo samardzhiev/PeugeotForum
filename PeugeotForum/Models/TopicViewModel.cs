@@ -21,6 +21,8 @@
         [Required]
         public int TopicId { get; set; }
 
+        public string Username { get; set; }
+
         public IList<Post> Posts { get; set; }
 
     }

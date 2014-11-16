@@ -63,6 +63,7 @@ textarea {
     left: 220px;
     border: 1px solid gray;
     margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .userArea {
@@ -153,4 +154,8 @@ textarea {
 .editContent {
     min-width:500px; 
     min-height:150px
+}
+
+.deletePostBtn {
+    margin-left: 530px;
 }

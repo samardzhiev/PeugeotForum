@@ -80,6 +80,22 @@
         }
 
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="Moderator")]
+        public ActionResult DeletePost(int postId)
+        {
+            var post = this.data.Posts.Find(postId);
+            if (post == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
+            this.data.Posts.Delete(postId);
+            this.data.SaveChanges();
+
+            return PartialView("_DeletedPost");
+        }
+
+        [ValidateAntiForgeryToken]
         public ActionResult Like(int postId)
         {
             var post = this.data.Posts.Find(postId);

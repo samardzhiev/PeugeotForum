@@ -419,6 +419,7 @@
     <Content Include="Views\Shared\_LikePartial.cshtml" />
     <Content Include="Views\Shared\_PostContentPartial.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Post.cshtml" />
+    <Content Include="Views\Shared\_DeletedPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
