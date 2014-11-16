@@ -13,11 +13,11 @@
     using System.Collections.Generic;
 
     [Authorize(Roles = "Administrator")]
-    public class AdminHomeController : BaseController
+    public class AdminUsersController : BaseController
     {
         private const int PAGE_SIZE = 10;
 
-        public AdminHomeController(IPeugeotForumData data)
+        public AdminUsersController(IPeugeotForumData data)
             : base(data)
         {
 

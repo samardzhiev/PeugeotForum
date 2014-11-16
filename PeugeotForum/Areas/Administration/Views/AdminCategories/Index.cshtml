@@ -1,0 +1,42 @@
+﻿@using PeugeotForum.Areas.Administration.Models
+
+@{
+    ViewBag.Title = "Administrate categories";
+}
+
+@model CategoryViewModel
+
+@Html.ValidationSummary(null, new { @class = "text-danger" })
+
+<div>
+    @using (Html.BeginForm("AddCategory", "AdminCategories", FormMethod.Post))
+    {
+        @Html.TextBoxFor(m => m.Name, null, new { @class = "form-control", placeholder = "Add New Category" })
+        <input type="submit" value="Add" class="btn-success btn-block" />
+        @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
+    }
+</div>
+
+@(Html.Kendo().ListView<CategoryViewModel>()
+.Name("listView")
+.TagName("div")
+.ClientTemplateId("template")
+.DataSource(data =>
+{
+    data.Read(read =>
+    {
+        read.Action("GetCategories", "AdminCategories");
+    });
+})
+.HtmlAttributes(new { style = "width:300px" })
+)
+
+<script type="text/x-kendo-tmpl" id="template">
+    <div>
+        <h5>${Name}</h5>
+    </div>
+</script>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
