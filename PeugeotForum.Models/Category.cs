@@ -16,7 +16,6 @@
         public int CategoryId { get; set; }
 
         [Required]
-        //[Index(IsUnique=true)]
         public string Name { get; set; }
 
         public virtual ICollection<Topic> Topics { get; set; }

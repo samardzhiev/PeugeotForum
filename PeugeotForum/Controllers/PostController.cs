@@ -7,7 +7,6 @@
 
     using PeugeotForum.Data;
     using PeugeotForum.Models;
-    using System.Globalization;
 
     [Authorize]
     public class PostController : BaseController
@@ -44,10 +43,43 @@
             var countPosts = topic.Posts.Count();
 
             var lastPage = base.CalculateLastPage(topic, countPosts);
-
+            TempData["postAdded"] = true;
             return RedirectToAction("ViewTopic", "Topic", new { topicId = model.TopicId, page = lastPage });
         }
 
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPost(int postId)
+        {
+            var post = this.data.Posts.Find(postId);
+            if (post == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+            
+            return PartialView("~/Views/Shared/EditorTemplates/Post.cshtml", post);
+        }
+
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateEditedPost(PostEditViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
+            var post = this.data.Posts.Find(model.PostId);
+            if (post == null)
+            {
+                return RedirectToAction("Index", "Error");
+            }
+
+            post.Content = model.Content;
+            this.data.Posts.Update(post);
+            this.data.SaveChanges();
+            return PartialView("~/Views/Shared/DisplayTemplates/Post.cshtml", post);
+        }
+
+        [ValidateAntiForgeryToken]
         public ActionResult Like(int postId)
         {
             var post = this.data.Posts.Find(postId);

@@ -14,17 +14,14 @@
 </span>
 
 
-
 @for (int i = 0; i < Model.Posts.Count; i++)
 {
-    <div class="@(i % 2 == 0 ? "post postsShadowed" : "post postsNotShadowed")" id="@("post" + i)">
+    <div class="@(i % 2 == 0 ? "post postsShadowed" : "post postsNotShadowed")" id="@( Model.Posts[i].PostId)">
         @{
-            TempData["current"] = i;
             @Html.DisplayFor(m => m.Posts[i])
         }
     </div>
 }
-
 
 <input type="submit" id="btnAddNewPost" class="btn-success btnAddNewPost" onclick="showNewPostArea()" value="Add New Post" />
 
@@ -38,7 +35,10 @@
     </div>
     <div class="btnsNewPost" id="btnsNewPost">
         <input type="button" value="Cancel" id="btnCancel" onclick="revertBack()" class="btnCancel btn-danger" />
-        <input type="button" value="Submit" id="btnSubmitNewPost" onclick="validateContent()" class="btnSubmitNewPost btn-success" />
+        <input type="button" value="Submit" 
+               id="btnSubmitNewPost" 
+               onclick="validateContent('#textAreaNewPost', '#postForm')" 
+               class="btnSubmitNewPost btn-success" />
     </div>
 }
 
@@ -51,7 +51,7 @@
 })
 }
 
-<span class="alert-info">@(int.Parse(Request["page"]) + 1)</span>
+<span class="pageNmbr">@(int.Parse(Request["page"]) + 1)</span>
 
 @if ((bool)TempData["LastPage"] != true)
 {
@@ -63,9 +63,21 @@
 }
 
 
-
 @section scripts {
     <script>
+        document.onload = (function () {
+            @if (TempData["postAdded"] != null)
+            {
+                @:scrollToBottom();
+            }
+        }());
+        
+        function scrollToBottom() {
+            $('html, body').animate({
+                scrollTop: parseInt($("#btnAddNewPost").offset().top)
+            }, 1000);
+        }
+
         function showNewPostArea() {
             $('#btnAddNewPost').hide();
             $('#textAreaNewPost').show();
@@ -79,9 +91,8 @@
             $('#textAreaNewPost').val(undefined);
         }
 
-        function validateContent() {
-            console.log('cl');
-            var length = $('#textAreaNewPost').val().length;
+        function validateContent(elementSelector, formSelector) {
+            var length = $(elementSelector).val().length;
             if (length < 10) {
                 alert('The length of your post should be at least 10 characters.');
             }
@@ -89,10 +100,9 @@
                 alert('You have exceeded the maximum length of 1000 characters.');
             }
             else {
-                $('#postForm').submit();
+                $(formSelector).submit();
             }
         }
-
     </script>
 }
 

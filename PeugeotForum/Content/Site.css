@@ -138,3 +138,19 @@ textarea {
 .postsNotShadowed {
     background-color: #021200;
 }
+
+.pageNmbr {
+    margin: 0px 10px 0px 10px;
+    color:aliceblue;
+}
+
+.savePostBtn {
+    margin-top: 10px;
+    margin-left: 530px;
+    display: block;
+}
+
+.editContent {
+    min-width:500px; 
+    min-height:150px
+}

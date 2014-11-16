@@ -1,0 +1,26 @@
+﻿@using PeugeotForum.Models
+@using Microsoft.AspNet.Identity
+
+@model Post
+
+@Model.Content
+
+<div class="clearfix"></div>
+<span class="writtenAt">Written at @Model.CreatedOn.ToString("dd.MM.yy, HH:mm")</span>
+
+@if (this.User.Identity.GetUserId() == Model.ApplicationUserId || this.User.IsInRole("Moderator"))
+{
+    using (Ajax.BeginForm("EditPost", "Post", new { postId = Model.PostId }, new AjaxOptions()
+    {
+        UpdateTargetId = "postContentText" + Model.PostId,
+        InsertionMode = InsertionMode.Replace,
+    }, new { id = "editForm" + Model.PostId }))
+    {
+        @Html.AntiForgeryToken()
+    
+        <input type="submit" 
+               value="Edit" 
+               id="@( "editBtn" + Model.PostId )" 
+               class="editPostBtn btn-danger" />
+    }
+}

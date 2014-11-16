@@ -1,3 +1,21 @@
-﻿@model PeugeotForum.Models.Post
+﻿@using PeugeotForum.Models
 
-@Html.TextAreaFor(p => p.Content)
+@model Post
+
+@using (Ajax.BeginForm("UpdateEditedPost", "Post", new { postId = Model.PostId, content = Model.Content }, new AjaxOptions()
+{
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = Model.PostId.ToString()
+}
+, new { id = "saveEditForm" + Model.PostId }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TextAreaFor(p => p.Content, new { id = "editedContent" + Model.PostId, 
+                                            @class = "form-control editContent" })
+}
+
+<input type="button"
+       onclick="validateContent('@("#editedContent" + Model.PostId)', '@( "#saveEditForm" + Model.PostId )')"
+       value="Save"
+       class="btn-danger savePostBtn" />

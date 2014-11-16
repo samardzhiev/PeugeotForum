@@ -7,10 +7,12 @@
 
 @using (Ajax.BeginForm("Like", "Post", new { postId = Model.PostId }, new AjaxOptions
         {
-            UpdateTargetId = TempData["current"] + "likesArea",
+            UpdateTargetId = "likesArea" + Model.PostId,
             InsertionMode = InsertionMode.Replace,
         }))
 {
+    @Html.AntiForgeryToken()
+    
     if (Model.IsAbleToLike(this.User.Identity.GetUserId()))
     {
         <input type="submit" class="btn-info" value="Vote" />

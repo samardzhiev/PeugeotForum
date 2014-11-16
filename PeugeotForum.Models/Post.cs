@@ -16,8 +16,8 @@
         public int PostId { get; set; }
 
         [Required]
-        [MinLength(10,ErrorMessage="The length of the content should be at least 10 characters!")]
-        [MaxLength(1000, ErrorMessage="The length of the content should be less then 1000 characters!")]
+        [MinLength(10, ErrorMessage = "The length of the content should be at least 10 characters!")]
+        [MaxLength(1000, ErrorMessage = "The length of the content should be less then 1000 characters!")]
         public string Content { get; set; }
 
         [Required]
@@ -33,7 +33,6 @@
         [Required]
         public int TopicId { get; set; }
 
-        [Required]
         public virtual Topic Topic { get; set; }
 
         public bool IsAbleToLike(string userId)
