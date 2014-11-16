@@ -1,3 +1,6 @@
 /packages
-
-/PeugeotForum/Bin
+/PeugeotForum/obj
+/PeugeotForum.Models/obj
+/PeugeotForum.Models/bin
+/PeugeotForum.Data/obj
+/PeugeotForum.Data/bin
